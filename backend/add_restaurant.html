@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Restaurant | FoodieAds</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 flex items-center justify-center min-h-screen font-sans">
+
+  <div class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md">
+    <h1 class="text-3xl font-bold text-center text-indigo-600 mb-6">Add Restaurant</h1>
+    
+    <form id="restaurantForm" class="space-y-5">
+      <div>
+        <label class="block text-gray-700 font-medium mb-2">Restaurant Name</label>
+        <input type="text" name="name" value="Alpha Eateries" 
+               class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring focus:ring-indigo-200 focus:border-indigo-500" required>
+      </div>
+
+      <div>
+        <label class="block text-gray-700 font-medium mb-2">Location</label>
+        <input type="text" name="location" value="Nairobi"
+               class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring focus:ring-indigo-200 focus:border-indigo-500" required>
+      </div>
+
+      <div>
+        <label class="block text-gray-700 font-medium mb-2">Restaurant Image</label>
+        <input type="file" name="image" accept="image/*"
+               class="w-full border border-gray-300 rounded-lg px-3 py-2 bg-white focus:ring focus:ring-indigo-200 focus:border-indigo-500" required>
+      </div>
+
+      <button type="submit" 
+              class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded-lg font-semibold transition">
+        Add Restaurant
+      </button>
+    </form>
+
+    <div id="message" class="mt-4 text-center text-gray-700"></div>
+  </div>
+
+  <script>
+    const form = document.getElementById("restaurantForm");
+    const message = document.getElementById("message");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+
+      try {
+        const res = await fetch("http://127.0.0.1:8000/api/restaurants", {
+          method: "POST",
+          body: formData
+        });
+
+        if (!res.ok) throw new Error("Failed to add restaurant");
+
+        const data = await res.json();
+        message.innerHTML = `<p class="text-green-600 font-semibold">✅ ${data.name} added successfully!</p>`;
+        form.reset();
+      } catch (error) {
+        message.innerHTML = `<p class="text-red-600 font-semibold">❌ ${error.message}</p>`;
+      }
+    });
+  </script>
+
+</body>
+</html>

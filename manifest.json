@@ -1,0 +1,43 @@
+{
+  "name": "FoodieAds",
+  "short_name": "FoodieAds",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#ffffff",
+  "theme_color": "#f97316",
+  "categories": ["business","food"],
+  "icons": [
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+    ,
+    {
+      "src": "/icons/spoon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/fork.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    { "name": "Create Ad", "short_name": "New Ad", "url": "/create_ad.php", "icons": [{"src": "/icons/icon-192x192.png","sizes":"192x192"}] },
+    { "name": "My Ads", "short_name": "Ads", "url": "/view_ads.php", "icons": [{"src": "/icons/icon-192x192.png","sizes":"192x192"}] }
+  ]
+}
+<link rel="manifest" href="/Auth/manifest.json">

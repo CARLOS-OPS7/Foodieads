@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FoodieAds Restaurants</title>
+
+  <!-- TailwindCSS CDN -->
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#f97316">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+  <nav class="bg-white shadow p-4 flex justify-between items-center">
+    <h1 class="text-2xl font-bold text-indigo-600">FoodieAds</h1>
+    <button id="loadRestaurants" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg">Load Restaurants</button>
+  </nav>
+
+  <main class="max-w-4xl mx-auto mt-10">
+    <h2 class="text-3xl font-semibold mb-6 text-center">Restaurants</h2>
+    <div id="restaurantsList" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+  </main>
+
+  <script>
+    document.getElementById("loadRestaurants").addEventListener("click", async () => {
+      const res = await fetch("http://127.0.0.1:8000/api/restaurants");
+      const data = await res.json();
+
+      const list = document.getElementById("restaurantsList");
+      list.innerHTML = "";
+
+      data.forEach(r => {
+        const card = document.createElement("div");
+        card.className = "bg-white p-4 rounded-xl shadow hover:shadow-lg transition";
+        card.innerHTML = `
+          <h3 class="text-xl font-semibold text-indigo-600">${r.name}</h3>
+          <p class="text-gray-500">${r.location}</p>
+        `;
+        list.appendChild(card);
+      });
+    });
+  </script>
+</body>
+</html>

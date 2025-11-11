@@ -1,1 +1,2 @@
 AddType application/json .json
+DirectoryIndex index.php index.html index.htm
